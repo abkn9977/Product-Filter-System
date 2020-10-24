@@ -56,6 +56,7 @@ if (isset($_POST['action'])) {
 
     //output variable contains filtered broduct content 
     $output = "";
+    $rows = 0;
     if ($rows > 0) {
         while ($data = $result->fetch_assoc()) {
             $stock_info = strcasecmp(htmlspecialchars($data['stock']), "in stock") == 0 ? '<div class="stock-info-green">'.htmlspecialchars($data['stock']).'</div>' : '<div class="stock-info-red">'. htmlspecialchars($data['stock']).'</div>';
