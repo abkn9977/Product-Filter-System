@@ -10,38 +10,18 @@ $(document).ready(function() {
 
     priceSlider.oninput = function() {
         priceValue.innerHTML = this.value;
-        filter_price();
+        filter_product();
     }
     
-    //filter_price() function filters product 
-    //when price is changed
-    function filter_price() {
-        var action = "filterRequest";
-        var price = priceSlider.value;
-        $.ajax({
-            url: "filter.php",
-            method: "post",
-            data: {
-                action: action,
-                price: price,
-            },
-            success: function(response) {
-                $("#result").html(response);
-                $("#filteredTexts").html("Product filtered");
-            }
-        });
-    }
-
     //filter on any checkbox is checked
     $(".product-check").click(function() {
-        console.log("Checked");
-
-        //filter_product() function filters product in each checkbox click
         filter_product();
     });
     
+    //filter_product() function filters product in each checkbox click or price range slide
     function filter_product() {
         var action = "filterRequest";
+        var price = priceSlider.value;
         var size = get_filtered_product('size');
         var category = get_filtered_product('category');
         var brand = get_filtered_product('brand');
@@ -52,6 +32,7 @@ $(document).ready(function() {
             method: "post",
             data: {
                 action: action,
+                price : price,
                 size: size,
                 category: category,
                 brand: brand,
