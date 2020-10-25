@@ -49,14 +49,13 @@ if (isset($_POST['action'])) {
     $sql .= " GROUP BY p.pid";
 
     $result = $connect->query($sql);
-    
+    $rows = 0;
     if($result){
         $rows = $result -> num_rows;
     }
 
     //output variable contains filtered broduct content 
     $output = "";
-    $rows = 0;
     if ($rows > 0) {
         while ($data = $result->fetch_assoc()) {
             $stock_info = strcasecmp(htmlspecialchars($data['stock']), "in stock") == 0 ? '<div class="stock-info-green">'.htmlspecialchars($data['stock']).'</div>' : '<div class="stock-info-red">'. htmlspecialchars($data['stock']).'</div>';
